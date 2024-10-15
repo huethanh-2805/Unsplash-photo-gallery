@@ -1,14 +1,15 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import PhotoGrid from "./components/PhotoGrid";
 import PhotoDetails from "./components/PhotoDetails";
 
 const App = () => {
     return (
       <div>
-        <h1>Unsplash Photo Gallery</h1>
         <Routes>
-            <Route path="/" element={<PhotoGrid/>}></Route>
+            {/* Chuyển hướng từ '/' đến '/photos' */}
+            <Route path="/" element={<Navigate to="/photos" />} /> 
+            <Route path="/photos" element={<PhotoGrid/>}></Route>
             <Route path="/photos/:id" element={<PhotoDetails/>}></Route>
         </Routes>
       </div>  

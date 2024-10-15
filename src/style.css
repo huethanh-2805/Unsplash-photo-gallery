@@ -1,15 +1,75 @@
 .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-  }
-  
-  .photo-item {
-    text-align: center;
-  }
-  
-  .photo-details img {
-    max-width: 100%;
-    height: auto;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 100%; /* Giới hạn chiều rộng tối đa của grid */
+  overflow: hidden; /* Ẩn phần thừa nếu có */
+}
+
+.photo-item {
+  text-align: center;
+  border: 1px solid #ddd;   /* Đường viền cho ảnh */
+  border-radius: 8px;   /* Bo góc */
+  overflow: hidden;   /* Ẩn phần thừa */
+  transition: transform 0.2s;   /* Hiệu ứng khi hover */
+}
+
+.photo-item:hover {
+  transform: scale(1.05);   /* Phóng to ảnh khi hover */
+}
+
+.photo-item img {
+  width: 100%;   /* Đảm bảo ảnh chiếm 100% chiều rộng của item */
+  height: auto;   /* Đảm bảo tỷ lệ ảnh không bị biến dạng */
+}
+
+.photo-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.photo-details img {
+  width: 100%;   /* Chiếm 100% chiều rộng */
+  border-radius: 8px;
+  max-height: 400px; /* Giới hạn chiều cao của ảnh để tránh bị lớn quá */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+}
+
+.photo-details h2 {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.photo-details p {
+  font-size: 18px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.sticky-button {
+  position: fixed; 
+  bottom: 20px; /* Khoảng cách từ đáy màn hình */
+  right: 20px; /* Khoảng cách từ bên phải màn hình */
+  z-index: 1000; /* Đảm bảo nút nằm trên các phần tử khác */
+  background-color: #007bff; 
+  color: white; 
+  border: none; 
+  border-radius: 5px; /* Bo góc */
+  padding: 10px 15px; /* Khoảng cách nội dung */
+  cursor: pointer; /* Đổi con trỏ khi di chuột qua */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Đổ bóng cho nút */
+  transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
+}
+
+.sticky-button:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+}

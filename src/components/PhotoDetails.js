@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 
 const PhotoDetails = () => {
-    const {id} = useParams();
+    const {id} = useParams(); // Lấy ID từ URL
     const [photo, setPhoto] = useState(null)
-
     const accessKey = '_BPCn3UPjUvvQSeTD8nUnISgpYyr-zqXvrAk4gqX7jw';
+    const navigate = useNavigate(); // khởi tạo navigate
 
     useEffect(() => {
         const fetchPhotoDetails = async () => {
@@ -23,17 +23,42 @@ const PhotoDetails = () => {
 
         fetchPhotoDetails();
     }, [id]);
-
-    if (!photo)
-        return <p>Loading photo details...</p>;
-
+        
     return (
-        <div className="photo-details">
-            <img src={photo.urls.full} alt={photo.alt_description}/>
-            <h2>{photo.descrition || 'No description available'}</h2>
-            <p>By: {photo.user.name}</p>
-            <p>{photo.location?.name || 'No location available'}</p>
-        </div>
+        <>
+            <div style={{ textAlign: "center" }}>
+                <h1>Detail of Photo</h1>
+            </div>
+            
+            <div className="container my-4">
+                {photo ? (
+                    <div className="card text-center">
+                        <img src={photo.urls.full} className="card-img-top" alt={photo.alt_description} />
+                        <div className="card-body">
+                            <h2 className="card-title">{photo.title || 'No title available'}</h2> {/* Tiêu đề ảnh, nếu có */}
+                            <p className="card-text"><strong>By:</strong> {photo.user.name}</p>
+                            <p><strong>Description:</strong> {photo.description || 'No description available'}</p> {/* Mô tả ảnh, nếu có */}
+                        </div>
+                    </div>
+                ) : (
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading photo details...
+                        </button>
+                    </div>
+                )}
+            </div>
+
+            {/* Nút quay lại (Sticky Button) */}
+            <button 
+                type="button" 
+                className="sticky-button" 
+                onClick={() => navigate(-1)}
+            >
+                <i className="fas fa-arrow-left"></i> Go Back
+            </button>
+        </>
     );
 };
 
